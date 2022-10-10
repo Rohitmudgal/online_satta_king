@@ -4,7 +4,7 @@ from turtle import title, update
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from datetime import date, datetime
 from .models import *
 import razorpay
 from django.core.mail import send_mail
@@ -159,10 +159,18 @@ def Bank(request,):
     return render (request,'manage_bank.html',data)
 
 def Winning(request):
+    
     return render (request,'winning_history.html')
 
 def BID(request):
-    return render (request,'bid_history.html')
+        data=User.objects.all()
+        data1=Milan_MorningFullSangam.objects.all()
+        context={  
+            'data': data,
+            'data1':data1
+        }  
+        return render (request,'bid_history.html',context)
+   
 
 def GamesRate(request):
     return render (request,'games_rate.html')
@@ -193,15 +201,20 @@ def ADDPOINT(request):
         user=request.user
         amount=int(request.POST.get('amount'))*100
         print(amount,user)
-     
-        client=razorpay.Client(auth=("rzp_test_0bMnppZkcH5iNA" ,"0AcheZdJJKGpYl3MaJvrdOyD"))
+        client=razorpay.Client(auth=("rzp_test_WYJiWly9dl8E6t" ,"z5S2phbuGWzBTghHxk8GqBjz"))
         payment=client.order.create({'amount' :amount,'currency': 'INR','payment_capture':'1'})
-        
-        print(payment)
-        return render (request,'success.html',{'payment': payment})
+        # print(payment)
+        # a=amount/100
+        # userpoint=POINTS(points=a)
+        # userpoint.save()
+        return render (request,'add_point.html',{'payment': payment})
+       
     return render (request,'add_point.html')
 
 def Success(request):
+    if request.method=="POST":
+        a=request.POST
+        print(a)
     return render (request,"success.html")
 
 def STARLINE(request):
@@ -1176,7 +1189,7 @@ def SUPREMEDAYHALFSANGAM(request):
         sdhs=Supreme_Day_HalfSangam(user=user,session=session,open_digit=open_digit,close_pana=close_pana,points=points,date=datetime.today())
         sdhs.save()
         messages.info(request,"Your Bid Recived.Thank You!! ")
-        return redirect('kalyan_morning')
+        return redirect('supremeday')
      return render (request,'SUPREMEDAY/halfsangam.html')
 
 def SUPREMEDAYFULLSANGAM(request):
@@ -1264,7 +1277,7 @@ def KALYANHALFSANGAM(request):
         khs=Kalyan_HalfSangam(user=user,session=session,open_digit=open_digit,close_pana=close_pana,points=points,date=datetime.today())
         khs.save()
         messages.info(request,"Your Bid Recived.Thank You!! ")
-        return redirect('kalyan_')
+        return redirect('kalyan')
      return render (request,'KALYAN/halfsangam.html')
 
 def KALYANFULLSANGAM(request):

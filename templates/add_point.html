@@ -18,6 +18,7 @@
     resize: vertical;
   }
 
+
   label {
     padding: 12px 12px 12px 0;
     display: inline-block;
@@ -59,11 +60,59 @@
     </div>
 
     <div class="button">
-      <input type="submit" class="btn btn-secondary   btn-lg btn-block fa fa-add" value="Pay With
+      <input type="submit"  class="btn btn-secondary   btn-lg btn-block fa fa-add" value="Pay With
       Rozorpay">
+      
     </div>
   </div>
  </form>
+ {% if payment%}
+ {% comment %} <form action="{%url 'success'%}" method="POST"> {% endcomment %}
+  <div class="container">
+ <button id="rzp-button1">Pay</button>
+  </div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_WYJiWly9dl8E6t", 
+    "amount": "{payment.amount}", 
+    "currency": "INR",
+    "name": "Acme Corp",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{payment.id}}",
+    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% comment %} </form> {% endcomment %}
+{% endif %}
+
+ 
  </div>
 
 

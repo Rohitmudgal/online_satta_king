@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}winning history{% endblock  %}
+{% block title %}Bid history{% endblock  %}
 {%block contant%}
 {% load static  %}
 <style>
@@ -82,14 +82,30 @@
         font-weight: 600;
         font-size: 20px;
     }
-   
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+      margin-top:50px;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 16px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 </style>
 <nav class="wallet_nav">
   <div class="heading">Bid History</div>
 
 </nav>
 <div class="winning_container">
-    <form action="/action_page.php">
+    <form action="{%url 'bid'%}" method="POST">
+      {% csrf_token %}
     <div class="w_row">
         <div class="col-25">
             <label for="datefrom">From Date</label>
@@ -111,6 +127,28 @@
         </div>
     
     </form>
+
+    <table>
+      <tr>
+        <th>First</th>
+        <th>Date</th>
+        <th>Points</th>
+        <th>Bazar</th>
+      </tr>
+      <tr>
+        {%for i in data%}
+        <td>{{i.first_name}}</td>
+        {%for p in data1%}
+        {% if i.user == p.user %}
+        <td>{{p.date}}</td>
+        <td>{{p.points}}</td>
+        {% endif %}
+        {% endfor %}
+        <td>Milan Morning</td>
+      </tr>
+      {% endfor %}
+      
+    </table>
       
 </div>
 {% endblock contant %}

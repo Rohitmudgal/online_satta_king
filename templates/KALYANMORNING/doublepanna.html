@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Kalyan Morning{% endblock %}
 {% block contant %}
+
+
 <style>
   .wallet_nav {
     padding: 0 30px;
@@ -236,6 +238,15 @@
 
   </form>
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+  {%if messages%}    
+  {% for msg in messages%}
+  swal('{{msg}}');
+  {% endfor %}
+  {% endif %}
+  
+  </script>
 <script>
   var today = new Date();
   var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();

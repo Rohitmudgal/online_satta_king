@@ -4,48 +4,29 @@
 <style>
    
 
-    .first {
+    .gamerate {
         position:relative;
+        margin:20px;
+        left:50px;
+        width: 33%;
+        display:flex;
+        align-item:center;
+        justify-content:space-between;
+        background-color: green;
+        border-radius:20px;
+        padding:5px 20px;
+        float:left;
+
         
-        left:50px;
-        margin:20px;
-        width: 33%;
-        display: inline-block;
-        background-color: green;
-        border-radius:20px;
-        text-align:center;
     }
-
-    .second {
-        position:relative;
-       
-        left:50px;
-        margin:20px;
-        width: 33%;
-        display: inline-block;
-        background-color: green;
-        border-radius:20px;
-        text-align:center;
-    }
-
-    .third {
-        position:relative;
-       
-        left:50px;
-        margin:20px;
-        width: 33%;
-        display: inline-block;
-        background-color: green;
-        border-radius:20px;
-        text-align:center;
-    }
+   
 
     @media screen and (max-width: 500px) {
 
-        .first,
-        .second,
-        .third {
-            width: 50%;
+        .gamerate{
+            width: 80%;
+            left: 10px;
+            right:5px;
         }
     }
     .wallet_nav {
@@ -70,17 +51,33 @@
 <div class="winning_container">
 
 
-<div class="first">
-    <p>First block</p>
+<div class="gamerate">
+    <div>Single Digit</div>
+    <div>10-95</div>   
 </div>
-<div class="second">
-    <p>Second block</p>
+<div class="gamerate">
+    <div>Jodi Digit</div>
+    <div>10-950</div>   
 </div>
-<div class="third">
-    <p>Third block </p>
+<div class="gamerate">
+    <div>Single Pana</div>
+    <div>10-1500</div>   
 </div>
-<div class="first">
-    <p>First block</p>
+<div class="gamerate">
+    <div>Double Pana</div>
+    <div>10-3000</div>   
+</div>
+<div class="gamerate">
+    <div>Triple Pana</div>
+    <div>10-7000</div>   
+</div>
+<div class="gamerate">
+    <div>Half Sangam</div>
+    <div>10-10000</div>   
+</div>
+<div class="gamerate">
+    <div>Full Sangam</div>
+    <div>10-100000</div>   
 </div>
 </div>
 {% endblock contant %}

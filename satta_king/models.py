@@ -127,8 +127,8 @@ class DailyTime(models.Model):
       ('Main Bazar','MAIN BAZAR'),
    )
    title=models.CharField(max_length=100, choices=Day_Choice)
-   Opne_Time=models.CharField(max_length=5)
-   Close_Time=models.CharField(max_length=5)
+   Opne_Time=models.CharField(max_length=8)
+   Close_Time=models.CharField(max_length=8)
    
 
 
